@@ -681,7 +681,7 @@ var disqus_config = function () {
     public function renderAll($buffer=false)
     {
         ob_start();
-        echo('<div typeof="Course">'."\n");
+        echo('<div typeof="Course" style="margin-bottom:15px;">'."\n");
         echo('<h1>'.$this->lessons->title."</h1>\n");
         echo('<p property="description">'.$this->lessons->description."</p>\n");
         echo('<div id="box">'."\n");
