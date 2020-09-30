@@ -178,3 +178,11 @@ msgstr "Nie można załadować profilu"
 #: Profile
 msgid "Cancel"
 msgstr "Anuluj"
+
+#: Badges
+msgid "Progress"
+msgstr "Postęp"
+
+#: Badges
+msgid "Badges Awarded"
+msgstr "Zdobyte odznaki"

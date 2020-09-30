@@ -833,8 +833,8 @@ var disqus_config = function () {
         $awarded = array();
 ?>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">Progress</a></li>
-  <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Badges Awarded</a></li>
+  <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true"><?php echo _m("Progress"); ?></a></li>
+  <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false"><?php echo _m("Badges Awarded"); ?></a></li>
 </ul>
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active in" id="home">
@@ -910,9 +910,9 @@ var disqus_config = function () {
 <p></p>
 <?php
     if ( count($awarded) < 1 ) {
-        echo("<p>No badges have been awarded yet.</p>");
+        echo("<p>Nie przyznano jeszcze żadnych odznak.</p>");
     } else if ( !isset($_SESSION['id']) || ! isset($_SESSION['context_id']) ) {
-        echo("<p>You must be logged in to see your badges.</p>\n");
+        echo("<p>Musisz być zalogowany, aby zobaczyć swoje odznaki.</p>\n");
     } else {
         echo("<ul style=\"list-style: none;\">\n");
         foreach($awarded as $badge) {
@@ -927,9 +927,9 @@ var disqus_config = function () {
         }
         echo("</ul>\n");
 ?>
-<p>These badges contain the official Open Badge metadata.  You can download the badge and
-put it on your own server, or add the badge to a "badge packpack".  You could validate the badge
-using <a href="http://www.dr-chuck.com/obi-sample/" target="_blank">A simple badge validator</a>.
+<p>Odznaki zawierają oficjalne metadane Open Badge. Możesz pobrać odznakę i
+umieścić ją na własnym serwerze lub dodać ją do swojego "pakietu odznak". Możesz
+zweryfikować odznakę za pomocą <a href="http://www.dr-chuck.com/obi-sample/" target="_blank">prostego walidatora</a>.
 </p>
 <?php
     }
