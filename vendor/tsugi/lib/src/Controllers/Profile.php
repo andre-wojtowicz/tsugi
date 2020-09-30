@@ -104,8 +104,8 @@ echo(' ('.$_SESSION['email'].")</h4>\n");
         <p>
         <form method="POST">
         <div class="control-group pull-right" style="margin-top: 20px; z-index: 1; position: relative;">
-        <button type="submit" class="btn btn-primary visible-phone"><?= echo _m("Save"); ?></button>
-        <input class="btn btn-warning" type="button" onclick="location.href='<?= $CFG->apphome ?>/index.php'; return false;" value="<?= echo _m("Cancel"); ?>"/>
+        <button type="submit" class="btn btn-primary visible-phone"><?php echo _m("Save"); ?></button>
+        <input class="btn btn-warning" type="button" onclick="location.href='<?= $CFG->apphome ?>/index.php'; return false;" value="<?php echo _m("Cancel"); ?>"/>
         </div>
         <div class="control-group">
         <div class="controls">
