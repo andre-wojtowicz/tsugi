@@ -140,6 +140,10 @@ msgid "Done"
 msgstr "Gotowe"
 
 #: Menu
+msgid "Back"
+msgstr "Powrót"
+
+#: Menu
 msgid "Settings"
 msgstr "Ustawienia"
 
