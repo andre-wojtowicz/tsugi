@@ -323,8 +323,8 @@ if ( $doLogin ) {
 
         // We made a user and made a displayname
         // Set up the session and fake an LTI launch
-        $welcome = "Welcome ";
-        if ( ! $didinsert ) $welcome .= "back ";
+        $welcome = _m("Welcome ");
+        if ( ! $didinsert ) $welcome .= _m("back ");
         $_SESSION["success"] = $welcome.($displayName)." (".$userEmail.")";
 
         // Also set up a fake LTI launch

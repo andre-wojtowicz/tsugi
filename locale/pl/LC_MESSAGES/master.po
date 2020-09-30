@@ -159,4 +159,10 @@ msgstr "Zaloguj"
 msgid "Logout"
 msgstr "Wyloguj"
 
+#: Login LTI
+msgid "Welcome "
+msgstr "Witaj "
 
+#: Login LTI
+msgid "back "
+msgstr "ponownie "
