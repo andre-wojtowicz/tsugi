@@ -714,7 +714,7 @@ $('a').each(function (x) {
         global $CFG;
         $R = $CFG->wwwroot . '/';
         $set = new \Tsugi\UI\MenuSet();
-        $set->setHome(_m('Done'), 'javascript:window.location.href=\''.urlencode($return_url).'\';');
+        $set->setHome(_m('Back'), 'javascript:window.location.href=\''.urlencode($return_url).'\';');
         return $set;
     }
 
