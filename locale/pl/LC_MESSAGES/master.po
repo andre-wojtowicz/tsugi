@@ -1,0 +1,158 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Master TSUGI\n"
+"POT-Creation-Date: 2014-06-10 08:11-0500\n"
+"PO-Revision-Date: 2014-06-10 08:53-0500\n"
+"Last-Translator: Andrzej Wójtowicz <andre@amu.edu.pl>\n"
+"Language-Team: Andrzej Wójtowicz <andre@amu.edu.pl>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _;__;_e;_m\n"
+"X-Poedit-SearchPath-0: lib\n"
+"X-Poedit-SearchPath-1: admin\n"
+"X-Poedit-SearchPath-2: common\n"
+"X-Poedit-SearchPath-3: core\n"
+"X-Poedit-SearchPath-4: lti\n"
+
+#: core/key/index.php:9 core/key/keys.php:9
+msgid "This service does not accept instructor requests for keys"
+msgstr "Ta usługa nie przyjmuje wniosków instruktorów o klucze"
+
+#: core/key/index.php:29
+msgid "Requests must have titles"
+msgstr "Wniosek musi zawierać tytuł"
+
+#: core/key/index.php:35
+msgid "LTI Version muse be 1 or 2"
+msgstr "Wersja LTI musi być 1 lub 2"
+
+#: lib/lms_lib.php:82
+#, php-format
+msgid "<p>Welcome %s from %s"
+msgstr "<p>Witaj %s z %s"
+
+#: lib/lms_lib.php:84
+#, php-format
+msgid "<p>Welcome %s"
+msgstr "<p>Witaj %s"
+
+#: lib/lms_lib.php:88
+#, php-format
+msgid "<p>Welcome from %s"
+msgstr "<p>Witaj z %s"
+
+#: lib/lms_lib.php:90
+msgid "<p>Welcome "
+msgstr "<p>Witaj "
+
+#: lib/lms_lib.php:95
+msgid "(Instructor)"
+msgstr "(Instruktor)\t"
+
+#: lib/lms_lib.php:1251
+msgid "Record deleted"
+msgstr "Wpis został usunięty"
+
+#: lib/lms_lib.php:1270
+msgid "Missing POST field: "
+msgstr "Brakujące pole POST:"
+
+#: lib/lms_lib.php:1297
+msgid "Cancel Edit"
+msgstr "Anuluj edycję"
+
+#: lib/lms_lib.php:1299
+msgid "Edit"
+msgstr "Edytuj"
+
+#: lib/lms_lib.php:1304
+msgid "Delete"
+msgstr "Usuń"
+
+#: lib/lms_lib.php:1354
+msgid "Update"
+msgstr "Aktualizuj"
+
+#: lib/lms_lib.php:1402
+msgid "Record Inserted"
+msgstr "Wpis został dodany"
+
+#: lib/lms_lib.php:1430
+msgid "Save"
+msgstr "Zapisz"
+
+#: Lessons
+msgid "Slides"
+msgstr "Slajdy"
+
+#: Lessons
+msgid "References"
+msgstr "Bibliografia"
+
+#: Lessons
+msgid "Previous"
+msgstr "Poprzednia"
+
+#: Lessons
+msgid "All"
+msgstr "Wszystkie"
+
+#: Lessons
+msgid "Next"
+msgstr "Następna"
+
+#: Lessons
+msgid "Tools"
+msgstr "Narzędzia"
+
+#: Lessons
+msgid "Login Required"
+msgstr "Wymagane zalogowanie"
+
+#: Lessons
+msgid "LTI Required"
+msgstr "Wymagane LTI"
+
+#: Lessons
+msgid "Assignment Solution"
+msgstr "Rozwiązanie zadania"
+
+#: Lessons
+msgid "Assignment Specification"
+msgstr "Specyfikacja zadania"
+
+#: Lessons
+msgid "Chapters"
+msgstr "Rozdziały"
+
+#: Menu
+msgid "Done"
+msgstr "Gotowe"
+
+#: Menu
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: Menu
+msgid "Admin"
+msgstr "Zarządzaj"
+
+#: Menu
+msgid "Links"
+msgstr "Linki"
+
+#: Menu
+msgid "Login"
+msgstr "Zaloguj"
+
+#: Menu
+msgid "Logout"
+msgstr "Wyloguj"
+
+
