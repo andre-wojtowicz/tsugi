@@ -420,20 +420,16 @@ if ( $success !== false ) {
 ?>
 <div style="margin: 30px">
 <p>
-We here at <?php echo($CFG->servicename); ?> use Google Accounts as our sole login.
-We do not want to spend a lot of time verifying identity, resetting passwords,
-detecting robot-login storms, and other issues so we let Google do that hard work.
+Na stronie <?php echo($CFG->servicename); ?> używamy kont Google jako jedynego loginu.
+Nie chcemy spędzać dużo czasu na weryfikowaniu tożsamości, resetowaniu haseł,
+wykrywaniu masowego logowania się przez roboty internetowe i innych problemów, więc pozwoliliśmy Google wykonać tę ciężką pracę.
 </p>
 <form method="post">
-    <a href="<?= $loginUrl ?>"><img src="<?= $CFG->staticroot ?>/img/google_signin_buttons/2x/btn_google_signin_dark_normal_web@2x.png" style="height: 3em;"></a>
     <input class="btn btn-warning" type="button" onclick="location.href='<?php echo($login_return); ?>'; return false;" value="Cancel" style="height: 2.5em;"/>
+    <input class="btn btn-primary" type="button" onclick="location.href='<?= $loginUrl ?>';" value="Zaloguj przy pomocy konta Google" style="height: 2.5em;"/>
 </form>
 <p>
-So you must have a Google account and we will require your
-name and email address to login.  We do not need and do not receive your password - only Google
-will ask you for your password.  When you press login, you will be directed to the Google
-authentication system where you will be given the option to share your
-information with <?php echo($CFG->servicename); ?>.
+Musisz mieć konto Google, a do zalogowania będziemy potrzebowali Twojego imienia, nazwiska oraz adresu e-mail. Nie potrzebujemy i nie otrzymujemy Twojego hasła - tylko Google zapyta Cię o Twoje hasło. Po naciśnięciu przycisku logowania zostaniesz przekierowany do systemu uwierzytelniania Google, gdzie będziesz mieć możliwość udostępnienia swoich informacji <?php echo($CFG->servicename); ?>.
 </p>
 </div>
 <?php
