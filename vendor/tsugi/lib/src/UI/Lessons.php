@@ -740,7 +740,7 @@ var disqus_config = function () {
                     }
                     echo("</td><td>".$lti->title."</td>\n");
                     if ( isset($allgrades[$lti->resource_link_id]) ) {
-                        echo("<td>Score: ".(100*$allgrades[$lti->resource_link_id])."</td>");
+                        echo("<td>Wynik: ".(100*$allgrades[$lti->resource_link_id])."</td>");
                     } else {
                         echo("<td>&nbsp;</td>");
                     }
