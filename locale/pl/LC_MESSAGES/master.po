@@ -166,3 +166,15 @@ msgstr "Witaj "
 #: Login LTI
 msgid "back "
 msgstr "ponownie "
+
+#: Profile
+msgid "Profile updated."
+msgstr "Profil został zaktualizowany."
+
+#: Profile
+msgid "Unable to load profile"
+msgstr "Nie można załadować profilu"
+
+#: Profile
+msgid "Cancel"
+msgstr "Anuluj"

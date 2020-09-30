@@ -103,28 +103,28 @@ echo(' ('.$_SESSION['email'].")</h4>\n");
 
         <p>
         <form method="POST">
-        <div class="control-group pull-right" style="margin-top: 20px">
-        <button type="submit" class="btn btn-primary visible-phone">Save</button>
-        <input class="btn btn-warning" type="button" onclick="location.href='<?= $CFG->apphome ?>/index.php'; return false;" value="Cancel"/>
+        <div class="control-group pull-right" style="margin-top: 20px; z-index: 1; position: relative;">
+        <button type="submit" class="btn btn-primary visible-phone"><?= echo _m("Save"); ?></button>
+        <input class="btn btn-warning" type="button" onclick="location.href='<?= $CFG->apphome ?>/index.php'; return false;" value="<?= echo _m("Cancel"); ?>"/>
         </div>
         <div class="control-group">
         <div class="controls">
-        How much mail would you like us to send?
+        Ile e-maili możemy Tobie wysyłać?
         <label class="radio">
         <?php self::radio('subscribe',-1,$subscribe); ?> >
-        No mail will be sent.
+        Nie chcę żadnych e-maili.
         </label>
         <label class="radio">
         <?php self::radio('subscribe',0,$subscribe); ?> >
-        Keep the mail level as low as possible.
+        Wysyłaj jak najmniej e-maili.
         </label>
         <label class="radio">
 <?php self::radio('subscribe',1,$subscribe); ?> >
-Send only announcements.
+Wysyłaj tylko ogłoszenia.
 </label>
 <label class="radio">
 <?php self::radio('subscribe',2,$subscribe); ?> >
-Send me notification mail for important things like my assignment was graded.
+Wysyłaj mi powiadomienia e-mail o ważnych sprawach, np. że moje zadanie zostało ocenione.
 </label>
 </div>
 </div>
