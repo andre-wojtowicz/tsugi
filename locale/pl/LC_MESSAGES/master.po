@@ -108,7 +108,7 @@ msgid "Next"
 msgstr "Następna"
 
 #: Lessons
-msgid "Tools"
+msgid "Tools:"
 msgstr "Narzędzia"
 
 #: Lessons
@@ -130,6 +130,10 @@ msgstr "Specyfikacja zadania"
 #: Lessons
 msgid "Chapters"
 msgstr "Rozdziały"
+
+#: Lessons
+msgid "Videos"
+msgstr "Filmy"
 
 #: Menu
 msgid "Done"
