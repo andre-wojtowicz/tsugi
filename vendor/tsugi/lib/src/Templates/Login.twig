@@ -2,22 +2,20 @@
 {% block content %}
 <div style="margin: 30px">
 <p>
-We here at {{ app.tsugi.cfg.servicename }} use Google Accounts as our sole login.
-We do not want to spend a lot of time verifying identity, resetting passwords,
-detecting robot-login storms, and other issues so we let Google do that hard work.
+Na stronie {{ app.tsugi.cfg.servicename }} używamy kont Google jako jedynego loginu.
+Nie chcemy spędzać dużo czasu na weryfikowaniu tożsamości, resetowaniu haseł,
+wykrywaniu masowego logowania się przez roboty internetowe i innych problemów, więc pozwoliliśmy Google wykonać tę ciężką pracę.
 </p>
 <form method="post">
     <input class="btn btn-warning" type="button" 
-        onclick="location.href='{{ login_return }}'; return false;" value="Cancel" 
+        onclick="location.href='{{ login_return }}'; return false;" value="Anuluj" 
         style="height: 2.5em;"/>
-    <a href="{{ loginUrl }}"><img src="{{ app.tsugi.cfg.staticroot }}/img/google_signin_buttons/2x/btn_google_signin_dark_normal_web@2x.png" style="height: 3em;"></a>
+    <input class="btn btn-primary" type="button" 
+        onclick="location.href='{{ loginUrl }}';" value="Zaloguj przy pomocy konta Google" 
+        style="height: 2.5em;"/>
 </form>
 <p>
-So you must have a Google account and we will require your
-name and email address to login.  We do not need and do not receive your password - only Google
-will ask you for your password.  When you press login, you will be directed to the Google
-authentication system where you will be given the option to share your
-information with {{ app.tsugi.cfg.servicename }}.
+Musisz posiadać konto Google, a do zalogowania będziemy potrzebowali Twojego imienia, nazwiska oraz adresu e-mail. Nie potrzebujemy i nie otrzymujemy Twojego hasła - tylko Google zapyta Cię o Twoje hasło. Po naciśnięciu przycisku logowania zostaniesz przekierowany do systemu uwierzytelniania Google, gdzie będziesz mieć możliwość udostępnienia swoich informacji {{ app.tsugi.cfg.servicename }}.
 </p>
 </div>
 {% endblock %}
