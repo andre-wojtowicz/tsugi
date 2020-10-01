@@ -35,7 +35,7 @@ msgstr "Wersja LTI musi być 1 lub 2"
 #: lib/lms_lib.php:82
 #, php-format
 msgid "<p>Welcome %s from %s"
-msgstr "<p>Witaj %s z %s"
+msgstr "<p>Witaj %s ze strony %s"
 
 #: lib/lms_lib.php:84
 #, php-format
@@ -45,7 +45,7 @@ msgstr "<p>Witaj %s"
 #: lib/lms_lib.php:88
 #, php-format
 msgid "<p>Welcome from %s"
-msgstr "<p>Witaj z %s"
+msgstr "<p>Witaj ze strony %s"
 
 #: lib/lms_lib.php:90
 msgid "<p>Welcome "
