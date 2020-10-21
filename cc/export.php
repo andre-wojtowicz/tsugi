@@ -158,7 +158,7 @@ foreach($l->lessons->modules as $module) {
 
     if ( isset($module->references) ) {
         foreach($module->references as $reference ) {
-            $title = 'Odnośnik: '.$reference->title;
+            $title = 'Link: '.$reference->title;
             $url = U::absolute_url($reference->href);
             $cc_dom->zip_add_url_to_module($zip, $sub_module, $title, $url);
         }
