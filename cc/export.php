@@ -29,9 +29,9 @@ if ( isset($_POST['ext_content_return_url']) ) {
 
     $OUTPUT->header();
     $OUTPUT->bodystart(false);
-    echo("<p>Course: ".htmlentities($l->lessons->title)."</p>\n");
+    echo("<p>Kurs: ".htmlentities($l->lessons->title)."</p>\n");
     echo("<p>".htmlentities($l->lessons->description)."</p>\n");
-    echo("<p>Modules: ".count($l->lessons->modules)."</p>\n");
+    echo("<p>Moduły: ".count($l->lessons->modules)."</p>\n");
     $resource_count = 0;
     $assignment_count = 0;
     foreach($l->lessons->modules as $module) {
@@ -42,10 +42,10 @@ if ( isset($_POST['ext_content_return_url']) ) {
             $assignment_count = $assignment_count + count($module->lti);
         }
     }
-    echo("<p>Resources: $resource_count </p>\n");
-    echo("<p>Assignments: $assignment_count </p>\n");
+    echo("<p>Zasoby: $resource_count </p>\n");
+    echo("<p>Zadania: $assignment_count </p>\n");
     echo("<center>\n");
-    echo('<a href="'.$return_url_normal.'" role="button" class="btn btn-success">Import Course</a>');
+    echo('<a href="'.$return_url_normal.'" role="button" class="btn btn-success">Importuj kurs</a>');
     if ( isset($CFG->youtube_url) ) {
             echo('<br/><a href="'.$return_url_youtube.'" role="button" class="btn btn-success">Import Course With Tracked YouTube URLs</a>');
     }
@@ -107,7 +107,7 @@ foreach($l->lessons->modules as $module) {
 
     if ( isset($module->videos) ) {
         foreach($module->videos as $video ) {
-            $title = 'Video: '.$video->title;
+            $title = 'Film: '.$video->title;
             if ( $youtube && isset($CFG->youtube_url) ) {
                 $custom_arr = array();
                 $endpoint = U::absolute_url($CFG->youtube_url);
@@ -124,7 +124,7 @@ foreach($l->lessons->modules as $module) {
     // Old way
     if ( isset($module->slides) && is_string($module->slides) ) {
         $url = U::absolute_url($module->slides);
-        $title = 'Slides: '.$module->title;
+        $title = 'Slajdy: '.$module->title;
         $cc_dom->zip_add_url_to_module($zip, $sub_module, $title, $url);
     }
 
@@ -139,26 +139,26 @@ foreach($l->lessons->modules as $module) {
                 $slide_href = $slide->href ;
             }
             $url = U::absolute_url($slide_href);
-            $title = 'Slides: '.$slide_title;
+            $title = 'Slajdy: '.$slide_title;
             $cc_dom->zip_add_url_to_module($zip, $sub_module, $title, $url);
         }
     }
 
     if ( isset($module->assignment) ) {
         $url = U::absolute_url($module->assignment);
-        $title = 'Assignment: '.$module->title;
+        $title = 'Zadanie: '.$module->title;
         $cc_dom->zip_add_url_to_module($zip, $sub_module, $title, $url);
     }
 
     if ( isset($module->solution) ) {
         $url = U::absolute_url($module->solution);
-        $title = 'Solution: '.$module->title;
+        $title = 'Rozwiązanie: '.$module->title;
         $cc_dom->zip_add_url_to_module($zip, $sub_module, $title, $url);
     }
 
     if ( isset($module->references) ) {
         foreach($module->references as $reference ) {
-            $title = 'Reference: '.$reference->title;
+            $title = 'Odnośnik: '.$reference->title;
             $url = U::absolute_url($reference->href);
             $cc_dom->zip_add_url_to_module($zip, $sub_module, $title, $url);
         }
@@ -167,7 +167,7 @@ foreach($l->lessons->modules as $module) {
     if ( isset($module->lti) ) {
         foreach($module->lti as $lti ) {
             $title = isset($lti->title) ? $lti->title : $module->title;
-            $title = 'Tool: '.$title;
+            $title = 'Narzędzie: '.$title;
             $custom_arr = array();
             if ( isset($lti->custom) ) {
                 foreach($lti->custom as $custom) {
