@@ -134,14 +134,14 @@ class SettingsForm {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span class="fa fa-close" aria-hidden="true"></span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title"><?=htmlentities($LINK->title)?> <?=__("Settings")?></h4>
+        <h4 class="modal-title"><?=htmlentities($LINK->title)?> - Konfiguracja</h4>
       </div>
       <div class="modal-body">
       <?php if ( $USER->instructor ) { ?>
         <form method="post">
       <?php } ?>
             <img id="settings_spinner" src="<?php echo($OUTPUT->getSpinnerUrl()); ?>" style="display: none">
-            <span id="save_fail" class="text-danger" style="display:none;"><?php _me('Unable to save settings'); ?></span>
+            <span id="save_fail" class="text-danger" style="display:none;"><?php _me('Nie można zapisać ustawień'); ?></span>
             <?php if ( $USER->instructor ) { ?>
             <input type="hidden" name="settings_internal_post" value="1"/>
             <?php }
@@ -155,7 +155,7 @@ class SettingsForm {
         if ( ! $USER ) return;
 ?>
         <?php if ( $USER->instructor ) { ?>
-        <button type="button" id="settings_save" onclick="submit();" class="btn btn-primary"><?= _m("Save changes") ?></button>
+        <button type="button" id="settings_save" onclick="submit();" class="btn btn-primary"><?= _m("Zapisz ustawienia") ?></button>
         </form>
         <?php } ?>
       </div>
@@ -186,9 +186,9 @@ class SettingsForm {
                 }
             }
             if ( $configured === false ) {
-                echo('<p>'._m('Setting').' '.htmlent_utf8($name).' '._m('is not set').'</p>');
+                echo('<p>'._m('Ustawienie').' '.htmlent_utf8($name).' '._m('nie jest skonfigurowane').'</p>');
             } else {
-                echo('<p>'.htmlent_utf8(ucwords($name)).' '._m('is set to').' '.htmlent_utf8($configured).'</p>');
+                echo('<p>'.htmlent_utf8(ucwords($name)).' '._m('ma ustawioną wartość').' '.htmlent_utf8($configured).'</p>');
             }
             return;
         }
@@ -337,7 +337,7 @@ class SettingsForm {
         $diff = -1;
         $penalty = false;
 
-        date_default_timezone_set('Pacific/Honolulu'); // Lets be generous
+        date_default_timezone_set('Europe/Warsaw'); // Lets be generous
         $new_time_zone = Settings::linkGet('timezone');
         if ( $new_time_zone && in_array($new_time_zone, timezone_identifiers_list())) {
             date_default_timezone_set($new_time_zone);
@@ -348,9 +348,7 @@ class SettingsForm {
         $penalty_time = Settings::linkGet('penalty_time') ? Settings::linkGet('penalty_time') + 0 : 24*60*60;
         $penalty_cost = Settings::linkGet('penalty_cost') ? Settings::linkGet('penalty_cost') + 0.0 : 0.2;
 
-        $retval->penaltyinfo = sprintf(_m("Once the due date has passed your
-            score will be reduced by %f percent and each %s after the due date,
-            your score will be further reduced by %s percent."),
+        $retval->penaltyinfo = sprintf(_m("Po upływie terminu oddania zadania Twój wynik zostanie zredukowany o %f procent, a każde dodatkowo % po upływie terminu dodatkowo zredukuje Twój wynik o dodatkowe %f procent."),
                 htmlent_utf8($penalty_cost*100), htmlent_utf8(self::getDueDateDelta($penalty_time)),
                 htmlent_utf8($penalty_cost*100) );
 
@@ -371,7 +369,7 @@ class SettingsForm {
             $retval->dayspastdue = $diff / (24*60*60);
             $retval->percent = intval($penalty * 100);
             $retval->message = sprintf(
-                _m("It is currently %s past the due date (%s) so your late penalty is %f percent."),
+                _m("Obecnie minęło %s od terminu oddania zadania (%s), zatem kara za oddanie po terminie wynosi %f procent."),
                 self::getDueDateDelta($diff), htmlentities($duedatestr),$retval->percent);
         }
         return $retval;
@@ -383,13 +381,13 @@ class SettingsForm {
     public static function getDueDateDelta($time)
     {
         if ( $time < 600 ) {
-            $delta = $time . ' seconds';
+            $delta = $time . ' sek.';
         } else if ($time < 3600) {
-            $delta = sprintf("%0.0f",($time/60.0)) . ' ' . _m('minutes');
+            $delta = sprintf("%0.0f",($time/60.0)) . ' ' . _m('min.');
         } else if ($time <= 86400 ) {
-            $delta = sprintf("%0.2f",($time/3600.0)) . ' ' . _m('hours');
+            $delta = sprintf("%0.2f",($time/3600.0)) . ' ' . _m('godz.');
         } else {
-            $delta = sprintf("%0.2f",($time/86400.0)) . ' ' . _m('days');
+            $delta = sprintf("%0.2f",($time/86400.0)) . ' ' . _m('dni');
         }
         return $delta;
     }
@@ -402,8 +400,8 @@ class SettingsForm {
         global $USER;
         if ( ! $USER ) return false;
         $due = Settings::linkGet('due', '');
-        $timezone = Settings::linkGet('timezone', 'Pacific/Honolulu');
-        if ( ! in_array($timezone, timezone_identifiers_list()) ) $timezone = 'Pacific/Honolulu';
+        $timezone = Settings::linkGet('timezone', 'Europe/Warsaw');
+        if ( ! in_array($timezone, timezone_identifiers_list()) ) $timezone = 'Europe/Warsaw';
         $time = Settings::linkGet('penalty_time', 86400);
         $cost = Settings::linkGet('penalty_cost', 0.2);
 
@@ -422,13 +420,10 @@ class SettingsForm {
         }
 ?>
         <label for="due">
-            <?= _m("Please enter a due date in ISO 8601 format (2015-01-30T20:30) or leave blank for no due date.
-            You can leave off the time to allow the assignment to be turned in any time during the day.") ?><br/>
+            <?= _m("Wprowadź termin wykonania zadania w formacie ISO 8601 (np. 2020-01-30T20:30) lub pozostaw to pole puste, dzięki czemu nie będzie terminu wykonania zadania. Możesz pominąć to ustawienie, tak aby umożliwić oddanie zadania w dowolnym czasie.") ?><br/>
         <input type="text" class="form-control" value="<?php echo(htmlspec_utf8($due)); ?>" name="due"></label>
         <label for="timezone">
-            <?= _m("Please enter a valid PHP Time Zone like 'Pacific/Honolulu' (default).  If you are
-            teaching in many time zones around the world, 'Pacific/Honolulu' is a good time
-            zone to choose - this is why it is the default if it is available.") ?><br/>
+            <?= _m("Wprowadź poprawną strefę czasową w formacie PHP, np. 'Europe/Warsaw' (wartość domyślna). Jeśli uczysz w wielu strefach czasowych na całym świecie, to 'UTC' lub 'Pacific/Honolulu' będą dobrym wyborem.") ?><br/>
         <select name="timezone" class="form-control">
 <?php
             foreach(timezone_identifiers_list() as $tz ) {
@@ -439,14 +434,11 @@ class SettingsForm {
 ?>
         </select>
         </label>
-            <p><?= _m("The next two fields determine the 'overall penalty' for being late.  We define a time period
-            (in seconds) and a fractional penalty per time period.  The penalty is assessed for each
-            full or partial time period past the due date.  For example to deduct 20% per day, you would
-            set the period to be 86400 (24*60*60) and the penalty to be 0.2.") ?>
+            <p><?= _m("Kolejne dwa pola określają 'całkowitą karę' za spóźnienie. Należy zdefiniować jednostkę czasu (w sekundach) oraz procentową karę za każdą jednostkę. Kara jest naliczana za każdą pełną lub częściową jednostkę czasu po terminie. Na przykład, aby odjąć 20% za dzień spóźnienia, ustawiamy jednostkę czasu na 86400 (24*60*60), a karę na 0.2.") ?>
             </p>
-        <label for="penalty_time"><?= _m("Please enter the penalty time period in seconds.") ?><br/>
+        <label for="penalty_time"><?= _m("Wprowadź poniżej w sekundach jednostkę czasu dla kary za spóźnienie.") ?><br/>
         <input type="text" class="form-control" value="<?php echo(htmlspec_utf8($time)); ?>" name="penalty_time"></label>
-        <label for="penalty_cost"><?= _m("Please enter the penalty deduction as a decimal between 0.0 and 1.0.") ?><br/>
+        <label for="penalty_cost"><?= _m("Wprowadź poniżej procentową karę za spóźnienie jako liczbę rzeczywistą pomiędzy 0.0 a 1.0.") ?><br/>
         <input type="text" class="form-control" value="<?php echo(htmlspec_utf8($cost)); ?>" name="penalty_cost"></label>
 <?php
     }
