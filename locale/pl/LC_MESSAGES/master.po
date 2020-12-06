@@ -93,7 +93,7 @@ msgstr "Slajdy"
 
 #: Lessons
 msgid "References"
-msgstr "Bibliografia"
+msgstr "Literatura i dodatkowe materiały"
 
 #: Lessons
 msgid "Previous"
@@ -109,7 +109,7 @@ msgstr "Następna"
 
 #: Lessons
 msgid "Tools:"
-msgstr "Narzędzia"
+msgstr "Ćwiczenia"
 
 #: Lessons
 msgid "Login Required"
