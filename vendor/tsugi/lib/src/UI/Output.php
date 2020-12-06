@@ -129,7 +129,10 @@ class Output {
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?= $CFG->servicename ?><?php if ( isset($CFG->context_title) ) echo(' - '.$CFG->context_title); ?></title>
+        <title><?= $CFG->servicename ?><?php if ( isset($CFG->context_title) ) echo(' – '.$CFG->context_title); ?></title>
+        <meta property="og:title" content=<?php echo("'".$CFG->context_title."'"); ?> />
+        <meta property="og:image" content=<?php echo("'".$CFG->apphome."/cover3-final-pl.jpg'"); ?> />
+        <meta property="og:type" content='website' />
         <script>
         var _TSUGI = {
 <?php
