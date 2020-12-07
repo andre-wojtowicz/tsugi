@@ -182,7 +182,12 @@ class Output {
         <!-- Highlight.js -->
         <link rel="stylesheet" href=<?php echo("'".$CFG->apphome."/hljs/styles/github.css'"); ?> >
         <script src=<?php echo("'".$CFG->apphome."/hljs/highlight.pack.js'"); ?> ></script>
-        <script>hljs.initHighlightingOnLoad();</script>
+        <script>
+            document.querySelectorAll('pre code:not([class])').forEach(function($) {
+                $.className = 'no-highlight';
+            });
+            hljs.initHighlightingOnLoad();
+        </script>
         <!-- Tiny bit of JS -->
         <script src="<?= $CFG->staticroot ?>/js/tsugiscripts_head.js"></script>
         <!-- Le styles -->
