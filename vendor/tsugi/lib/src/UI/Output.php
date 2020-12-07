@@ -180,8 +180,8 @@ class Output {
         }
         </script>
         <!-- Highlight.js -->
-        <link rel="stylesheet" href=<?php echo("'".$CFG->context_title."/hljs/styles/github.css'"); ?> >
-        <script src=<?php echo("'".$CFG->context_title."/hljs/highlight.pack.js'"); ?> ></script>
+        <link rel="stylesheet" href=<?php echo("'".$CFG->apphome."/hljs/styles/github.css'"); ?> >
+        <script src=<?php echo("'".$CFG->apphome."/hljs/highlight.pack.js'"); ?> ></script>
         <script>hljs.initHighlightingOnLoad();</script>
         <!-- Tiny bit of JS -->
         <script src="<?= $CFG->staticroot ?>/js/tsugiscripts_head.js"></script>
