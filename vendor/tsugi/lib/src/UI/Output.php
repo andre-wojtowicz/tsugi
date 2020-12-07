@@ -179,6 +179,10 @@ class Output {
             session_expire_message: "<?= _m('Your session has expired') ?>"
         }
         </script>
+        <!-- Highlight.js -->
+        <link rel="stylesheet" href=<?php echo("'".$CFG->context_title."/hljs/styles/github.css'"); ?> >
+        <script src=<?php echo("'".$CFG->context_title."/hljs/highlight.pack.js'"); ?> ></script>
+        <script>hljs.initHighlightingOnLoad();</script>
         <!-- Tiny bit of JS -->
         <script src="<?= $CFG->staticroot ?>/js/tsugiscripts_head.js"></script>
         <!-- Le styles -->
