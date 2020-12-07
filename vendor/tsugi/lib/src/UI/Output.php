@@ -183,9 +183,7 @@ class Output {
         <link rel="stylesheet" href=<?php echo("'".$CFG->apphome."/hljs/styles/github.css'"); ?> >
         <script src=<?php echo("'".$CFG->apphome."/hljs/highlight.pack.js'"); ?> ></script>
         <script>
-            document.querySelectorAll('pre code:not([class])').forEach(function($) {
-                $.className = 'no-highlight';
-            });
+            hljs.configure({languages: []});
             hljs.initHighlightingOnLoad();
         </script>
         <!-- Tiny bit of JS -->
