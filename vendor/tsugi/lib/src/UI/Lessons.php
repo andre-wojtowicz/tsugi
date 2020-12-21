@@ -434,7 +434,7 @@ class Lessons {
                 if ( isset($module->{$plural}) ) {
                     echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$plural.'">');
                     $list_title = __(self::getSetting($plural.'-title', ucfirst($plural)));
-                    echo("<p>");
+                    echo("<p style='display: inline-block;'>");
                     echo(__($list_title));
                     echo("</p>");
                     echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
@@ -504,7 +504,7 @@ class Lessons {
                 $singular = 'slide';
                 $plural = $singular.'s';
                 echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-slides">');
-                echo("<p>");
+                echo("<p style='display: inline-block;'>");
                 $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural))) . ' [ENG]';
                 echo(__($slidestitle));
                 echo("</p>");
@@ -554,7 +554,7 @@ class Lessons {
                 $videos = $module->videos;
                 echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-videos">');
                 $videotitle = __(self::getSetting('videos-title', 'Videos')) . ' [ENG]';
-                echo("<p>");
+                echo("<p style='display: inline-block;'>");
                 echo($videotitle);
                 echo("</p>");
                 echo('<ul class="tsugi-lessons-module-videos-ul">'."\n");
