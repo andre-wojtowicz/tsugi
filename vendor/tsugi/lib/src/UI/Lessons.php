@@ -434,9 +434,9 @@ class Lessons {
                 if ( isset($module->{$plural}) ) {
                     echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$plural.'">');
                     $list_title = __(self::getSetting($plural.'-title', ucfirst($plural)));
-                    echo("<p style='display: inline-block;'>");
+                    echo("<p style='display: inline-block; vertical-align: sub;'><b>");
                     echo(__($list_title));
-                    echo("</p>");
+                    echo("</b></p>");
                     echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
                     foreach($module->{$plural} as $reference ) {
                         echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$singular.'">');
@@ -454,9 +454,9 @@ class Lessons {
             if ( isset($module->lti) && ! isset($_SESSION['secret']) ) {
                 $ltis = $module->lti;
                 echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
-                echo("<p style='display: inline-block;'>");
+                echo("<p style='display: inline-block; vertical-align: sub;'><b>");
                 echo(__('Tools:'));
-                echo("</p>");
+                echo("</b></p>");
                 echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
                 foreach($ltis as $lti ) {
                     $resource_link_title = isset($lti->title) ? $lti->title : $module->title;
@@ -472,9 +472,9 @@ class Lessons {
             {
                 $ltis = $module->lti;
                 echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
-                echo("<p style='display: inline-block;'>");
+                echo("<p style='display: inline-block; vertical-align: sub;'><b>");
                 echo(__('Tools:'));
-                echo("</p>");
+                echo("</b></p>");
                 echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
                 $count = 0;
                 foreach($ltis as $lti ) {
@@ -508,10 +508,10 @@ class Lessons {
                 $singular = 'slide';
                 $plural = $singular.'s';
                 echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-slides">');
-                echo("<p style='display: inline-block;'>");
+                echo("<p style='display: inline-block; vertical-align: sub;'><b>");
                 $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural))) . ' [ENG]';
                 echo(__($slidestitle));
-                echo("</p>");
+                echo("</b></p>");
                 echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
                 foreach($module->slides as $slide ) {
                     if ( is_string($slide) ) {
@@ -558,9 +558,9 @@ class Lessons {
                 $videos = $module->videos;
                 echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-videos">');
                 $videotitle = __(self::getSetting('videos-title', 'Videos')) . ' [ENG]';
-                echo("<p style='display: inline-block;'>");
+                echo("<p style='display: inline-block; vertical-align: sub;'><b>");
                 echo($videotitle);
-                echo("</p>");
+                echo("</b></p>");
                 echo('<ul class="tsugi-lessons-module-videos-ul">'."\n");
                 $lecno = 0;
                 foreach($videos as $video ) {
