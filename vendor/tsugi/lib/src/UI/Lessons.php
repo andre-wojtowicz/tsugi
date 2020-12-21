@@ -426,6 +426,130 @@ class Lessons {
 
             echo("<ul>\n");
 
+            // Reference like entries
+            $lists = array("reference", "assignment");
+            foreach($lists as $list) {
+                $singular = $list;
+                $plural = $list."s";
+                if ( isset($module->{$plural}) ) {
+                    echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$plural.'">');
+                    $list_title = __(self::getSetting($plural.'-title', ucfirst($plural)));
+                    echo("<p>");
+                    echo(__($list_title));
+                    echo("</p>");
+                    echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
+                    foreach($module->{$plural} as $reference ) {
+                        echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$singular.'">');
+                        echo('<span class="tsugi-lessons-module-'.$singular.'-icon"></span>');
+                        echo('<span class="tsugi-lessons-module-'.$singular.'-link">');
+                        self::nostyleLink($reference->title, $reference->href);
+                        echo("</span>\n");
+                        echo('</li>'."\n");
+                    }
+                    echo("</ul></li>\n");
+                }
+            }
+
+            // LTIs not logged in
+            if ( isset($module->lti) && ! isset($_SESSION['secret']) ) {
+                $ltis = $module->lti;
+                echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
+                echo(__('Tools:'));
+                echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
+                foreach($ltis as $lti ) {
+                    $resource_link_title = isset($lti->title) ? $lti->title : $module->title;
+                    echo('<li typeof="oer:assessment" class="tsugi-lessons-module-lti">'.htmlentities($resource_link_title).' ('.__('Login Required').') <br/>'."\n");
+                    echo("\n</li>\n");
+                }
+                echo("</li></ul><!-- end of ltis -->\n");
+            }
+
+            // LTIs logged in
+            if ( isset($module->lti) && U::get($_SESSION,'secret') && U::get($_SESSION,'context_key')
+                && U::get($_SESSION,'user_key') && U::get($_SESSION,'displayname') && U::get($_SESSION,'email') )
+            {
+                $ltis = $module->lti;
+                echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
+                echo(__('Tools:'));
+                echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
+                $count = 0;
+                foreach($ltis as $lti ) {
+                    $resource_link_title = isset($lti->title) ? $lti->title : $module->title;
+
+                    if ( $nostyle ) {
+                        echo('<li typeof="oer:assessment" class="tsugi-lessons-module-lti">'.htmlentities($resource_link_title).' (Login Required) <br/>'."\n");
+                        $ltiurl = U::add_url_parm($lti->launch, 'inherit', $lti->resource_link_id);
+                        echo('<span style="color:green">'.htmlentities($ltiurl)."</span>\n");
+                        if ( isset($_SESSION['gc_count']) ) {
+                            echo('<a href="'.$CFG->wwwroot.'/gclass/assign?rlid='.$lti->resource_link_id);
+                            echo('" title="Install Assignment in Classroom" target="iframe-frame"'."\n");
+                            echo("onclick=\"showModalIframe(this.title, 'iframe-dialog', 'iframe-frame', _TSUGI.spinnerUrl, true);\" >\n");
+                            echo('<img height=16 width=16 src="https://www.gstatic.com/classroom/logo_square_48.svg"></a>'."\n");
+                        }
+                        echo("\n</li>\n");
+                        continue;
+                    }
+
+                    $rest_path = U::rest_path();
+                    $launch_path = $rest_path->parent . '/' . $rest_path->controller . '_launch/' . $lti->resource_link_id;
+                    $title = isset($lti->title) ? $lti->title : "Autograder";
+                    echo('<li class="tsugi-lessons-module-lti"><a href="'.$launch_path.'">'.htmlentities($title).'</a></li>'."\n");
+                    echo("\n</li>\n");
+                }
+
+                echo("</li></ul><!-- end of ltis -->\n");
+            }
+
+            if ( isset($module->slides) ) {
+                $singular = 'slide';
+                $plural = $singular.'s';
+                echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-slides">');
+                echo("<p>");
+                $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural)));
+                echo(__($slidestitle));
+                echo("</p>");
+                echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
+                foreach($module->slides as $slide ) {
+                    if ( is_string($slide) ) {
+                        $slide_title = basename($slide);
+                        $slide_href = $slide;
+                    } else {
+                        $slide_title = $slide->title ;
+                        $slide_href = $slide->href ;
+                    }
+                    echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$singular.'">');
+                    echo('<span class="tsugi-lessons-module-'.$singular.'-icon"></span>');
+                    echo('<span class="tsugi-lessons-module-'.$singular.'-link">');
+                    self::nostyleLink($slide_title, $slide_href);
+                    echo("</span>\n");
+                    echo('</li>'."\n");
+                }
+                if ( count($module->slides) > 0 ) {
+                    echo("</ul></li>\n");
+                }
+            }
+            if ( isset($module->chapters) ) {
+                echo('<li typeof="SupportingMaterial">'.__('Chapters').': '.$module->chapters.'</a></li>'."\n");
+            }
+            if ( isset($module->assignment) ) {
+                if ( $nostyle ) {
+                    echo('<li typeof="oer:assessment">'.__('Assignment Specification').':');
+                    self::nostyleUrl(__('Assignment Specification'), $module->assignment);
+                    echo('</li>'."\n");
+                } else {
+                    echo('<li typeof="oer:assessment"><a href="'.$module->assignment.'" target="_blank">'.__('Assignment Specification').'</a></li>'."\n");
+                }
+            }
+            if ( isset($module->solution) ) {
+                if ( $nostyle ) {
+                    echo('<li typeof="oer:assessment">'.__('Assignment Solution').':');
+                    self::nostyleUrl(__('Assignment Solution'), $module->solution);
+                    echo('</li>'."\n");
+                } else {
+                    echo('<li typeof="oer:assessment"><a href="'.$module->solution.'" target="_blank">'.__('Assignment Solution').'</a></li>'."\n");
+                }
+            }
+
             if ( isset($module->videos) ) {
                 $videos = $module->videos;
                 echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-videos">');
@@ -511,130 +635,6 @@ class Lessons {
                     }
                 }
                 echo("</ul></li>\n");
-            }
-
-            if ( isset($module->slides) ) {
-                $singular = 'slide';
-                $plural = $singular.'s';
-                echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-slides">');
-                echo("<p>");
-                $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural)));
-                echo(__($slidestitle));
-                echo("</p>");
-                echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
-                foreach($module->slides as $slide ) {
-                    if ( is_string($slide) ) {
-                        $slide_title = basename($slide);
-                        $slide_href = $slide;
-                    } else {
-                        $slide_title = $slide->title ;
-                        $slide_href = $slide->href ;
-                    }
-                    echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$singular.'">');
-                    echo('<span class="tsugi-lessons-module-'.$singular.'-icon"></span>');
-                    echo('<span class="tsugi-lessons-module-'.$singular.'-link">');
-                    self::nostyleLink($slide_title, $slide_href);
-                    echo("</span>\n");
-                    echo('</li>'."\n");
-                }
-                if ( count($module->slides) > 0 ) {
-                    echo("</ul></li>\n");
-                }
-            }
-            if ( isset($module->chapters) ) {
-                echo('<li typeof="SupportingMaterial">'.__('Chapters').': '.$module->chapters.'</a></li>'."\n");
-            }
-            if ( isset($module->assignment) ) {
-                if ( $nostyle ) {
-                    echo('<li typeof="oer:assessment">'.__('Assignment Specification').':');
-                    self::nostyleUrl(__('Assignment Specification'), $module->assignment);
-                    echo('</li>'."\n");
-                } else {
-                    echo('<li typeof="oer:assessment"><a href="'.$module->assignment.'" target="_blank">'.__('Assignment Specification').'</a></li>'."\n");
-                }
-            }
-            if ( isset($module->solution) ) {
-                if ( $nostyle ) {
-                    echo('<li typeof="oer:assessment">'.__('Assignment Solution').':');
-                    self::nostyleUrl(__('Assignment Solution'), $module->solution);
-                    echo('</li>'."\n");
-                } else {
-                    echo('<li typeof="oer:assessment"><a href="'.$module->solution.'" target="_blank">'.__('Assignment Solution').'</a></li>'."\n");
-                }
-            }
-
-            // Reference like entries
-            $lists = array("reference", "assignment");
-            foreach($lists as $list) {
-                $singular = $list;
-                $plural = $list."s";
-                if ( isset($module->{$plural}) ) {
-                    echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$plural.'">');
-                    $list_title = __(self::getSetting($plural.'-title', ucfirst($plural)));
-                    echo("<p>");
-                    echo(__($list_title));
-                    echo("</p>");
-                    echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
-                    foreach($module->{$plural} as $reference ) {
-                        echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$singular.'">');
-                        echo('<span class="tsugi-lessons-module-'.$singular.'-icon"></span>');
-                        echo('<span class="tsugi-lessons-module-'.$singular.'-link">');
-                        self::nostyleLink($reference->title, $reference->href);
-                        echo("</span>\n");
-                        echo('</li>'."\n");
-                    }
-                    echo("</ul></li>\n");
-                }
-            }
-
-            // LTIs not logged in
-            if ( isset($module->lti) && ! isset($_SESSION['secret']) ) {
-                $ltis = $module->lti;
-                echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
-                echo(__('Tools:'));
-                echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
-                foreach($ltis as $lti ) {
-                    $resource_link_title = isset($lti->title) ? $lti->title : $module->title;
-                    echo('<li typeof="oer:assessment" class="tsugi-lessons-module-lti">'.htmlentities($resource_link_title).' ('.__('Login Required').') <br/>'."\n");
-                    echo("\n</li>\n");
-                }
-                echo("</li></ul><!-- end of ltis -->\n");
-            }
-
-            // LTIs logged in
-            if ( isset($module->lti) && U::get($_SESSION,'secret') && U::get($_SESSION,'context_key')
-                && U::get($_SESSION,'user_key') && U::get($_SESSION,'displayname') && U::get($_SESSION,'email') )
-            {
-                $ltis = $module->lti;
-                echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
-                echo(__('Tools:'));
-                echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
-                $count = 0;
-                foreach($ltis as $lti ) {
-                    $resource_link_title = isset($lti->title) ? $lti->title : $module->title;
-
-                    if ( $nostyle ) {
-                        echo('<li typeof="oer:assessment" class="tsugi-lessons-module-lti">'.htmlentities($resource_link_title).' (Login Required) <br/>'."\n");
-                        $ltiurl = U::add_url_parm($lti->launch, 'inherit', $lti->resource_link_id);
-                        echo('<span style="color:green">'.htmlentities($ltiurl)."</span>\n");
-                        if ( isset($_SESSION['gc_count']) ) {
-                            echo('<a href="'.$CFG->wwwroot.'/gclass/assign?rlid='.$lti->resource_link_id);
-                            echo('" title="Install Assignment in Classroom" target="iframe-frame"'."\n");
-                            echo("onclick=\"showModalIframe(this.title, 'iframe-dialog', 'iframe-frame', _TSUGI.spinnerUrl, true);\" >\n");
-                            echo('<img height=16 width=16 src="https://www.gstatic.com/classroom/logo_square_48.svg"></a>'."\n");
-                        }
-                        echo("\n</li>\n");
-                        continue;
-                    }
-
-                    $rest_path = U::rest_path();
-                    $launch_path = $rest_path->parent . '/' . $rest_path->controller . '_launch/' . $lti->resource_link_id;
-                    $title = isset($lti->title) ? $lti->title : "Autograder";
-                    echo('<li class="tsugi-lessons-module-lti"><a href="'.$launch_path.'">'.htmlentities($title).'</a></li>'."\n");
-                    echo("\n</li>\n");
-                }
-
-                echo("</li></ul><!-- end of ltis -->\n");
             }
 
         echo("</ul>\n");
