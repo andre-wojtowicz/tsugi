@@ -693,7 +693,6 @@ var disqus_config = function () {
         foreach($this->lessons->modules as $module) {
         if ( isset($module->hidden) && $module->hidden ) continue;
 	    if ( isset($module->login) && $module->login && !isset($_SESSION['id']) ) continue;
-            $count++;
             echo('<div class="card"><div>'."\n");
             $href = U::get_rest_path() . '/' . urlencode($module->anchor);
             if ( isset($module->icon) ) {
@@ -707,6 +706,7 @@ var disqus_config = function () {
                 echo('<br/>'.$desc."\n");
             }
             echo("</a></div></div>\n");
+            $count++;
         }
         echo('</div> <!-- box -->'."\n");
         echo('</div> <!-- typeof="Course" -->'."\n");
