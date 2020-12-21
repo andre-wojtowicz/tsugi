@@ -505,7 +505,7 @@ class Lessons {
                 $plural = $singular.'s';
                 echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-slides">');
                 echo("<p>");
-                $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural)));
+                $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural))) . '[ENG]';
                 echo(__($slidestitle));
                 echo("</p>");
                 echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
@@ -553,7 +553,7 @@ class Lessons {
             if ( isset($module->videos) ) {
                 $videos = $module->videos;
                 echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-videos">');
-                $videotitle = __(self::getSetting('videos-title', 'Videos'));
+                $videotitle = __(self::getSetting('videos-title', 'Videos')) . '[ENG]';
                 echo("<p>");
                 echo($videotitle);
                 echo("</p>");
