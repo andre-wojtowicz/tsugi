@@ -454,7 +454,9 @@ class Lessons {
             if ( isset($module->lti) && ! isset($_SESSION['secret']) ) {
                 $ltis = $module->lti;
                 echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
+                echo("<p style='display: inline-block;'>");
                 echo(__('Tools:'));
+                echo("</p>");
                 echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
                 foreach($ltis as $lti ) {
                     $resource_link_title = isset($lti->title) ? $lti->title : $module->title;
@@ -470,7 +472,9 @@ class Lessons {
             {
                 $ltis = $module->lti;
                 echo('<li typeof="oer:assessment" class="tsugi-lessons-module-ltis">');
+                echo("<p style='display: inline-block;'>");
                 echo(__('Tools:'));
+                echo("</p>");
                 echo('<ul class="tsugi-lessons-module-ltis-ul"> <!-- start of ltis -->'."\n");
                 $count = 0;
                 foreach($ltis as $lti ) {
