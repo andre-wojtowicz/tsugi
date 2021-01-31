@@ -450,6 +450,36 @@ class Lessons {
                 }
             }
 
+            // Slides
+            if ( isset($module->slides) ) {
+                $singular = 'slide';
+                $plural = $singular.'s';
+                echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-slides">');
+                echo("<p style='display: inline-block; vertical-align: sub;'><b>");
+                $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural)));
+                echo(__($slidestitle));
+                echo("</b></p>");
+                echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
+                foreach($module->slides as $slide ) {
+                    if ( is_string($slide) ) {
+                        $slide_title = basename($slide);
+                        $slide_href = $slide;
+                    } else {
+                        $slide_title = $slide->title ;
+                        $slide_href = $slide->href ;
+                    }
+                    echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$singular.'">');
+                    echo('<span class="tsugi-lessons-module-'.$singular.'-icon"></span>');
+                    echo('<span class="tsugi-lessons-module-'.$singular.'-link">');
+                    self::nostyleLink($slide_title, $slide_href);
+                    echo("</span>\n");
+                    echo('</li>'."\n");
+                }
+                if ( count($module->slides) > 0 ) {
+                    echo("</ul></li>\n");
+                }
+            }
+
             // LTIs not logged in
             if ( isset($module->lti) && ! isset($_SESSION['secret']) ) {
                 $ltis = $module->lti;
@@ -504,34 +534,6 @@ class Lessons {
                 echo("</li></ul><!-- end of ltis -->\n");
             }
 
-            if ( isset($module->slides) ) {
-                $singular = 'slide';
-                $plural = $singular.'s';
-                echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-slides">');
-                echo("<p style='display: inline-block; vertical-align: sub;'><b>");
-                $slidestitle = __(self::getSetting($plural.'title', ucfirst($plural))) . ' [ENG]';
-                echo(__($slidestitle));
-                echo("</b></p>");
-                echo('<ul class="tsugi-lessons-module-'.$plural.'-ul">'."\n");
-                foreach($module->slides as $slide ) {
-                    if ( is_string($slide) ) {
-                        $slide_title = basename($slide);
-                        $slide_href = $slide;
-                    } else {
-                        $slide_title = $slide->title ;
-                        $slide_href = $slide->href ;
-                    }
-                    echo('<li typeof="oer:SupportingMaterial" class="tsugi-lessons-module-'.$singular.'">');
-                    echo('<span class="tsugi-lessons-module-'.$singular.'-icon"></span>');
-                    echo('<span class="tsugi-lessons-module-'.$singular.'-link">');
-                    self::nostyleLink($slide_title, $slide_href);
-                    echo("</span>\n");
-                    echo('</li>'."\n");
-                }
-                if ( count($module->slides) > 0 ) {
-                    echo("</ul></li>\n");
-                }
-            }
             if ( isset($module->chapters) ) {
                 echo('<li typeof="SupportingMaterial">'.__('Chapters').': '.$module->chapters.'</a></li>'."\n");
             }
