@@ -35,7 +35,7 @@ msgstr "Wersja LTI musi być 1 lub 2"
 #: lib/lms_lib.php:82
 #, php-format
 msgid "<p>Welcome %s from %s"
-msgstr "<p>Witaj %s ze strony %s"
+msgstr "<p>Witaj <b>%s</b> ze strony <b>%s</b>"
 
 #: lib/lms_lib.php:84
 #, php-format
@@ -45,7 +45,7 @@ msgstr "<p>Witaj %s"
 #: lib/lms_lib.php:88
 #, php-format
 msgid "<p>Welcome from %s"
-msgstr "<p>Witaj ze strony %s"
+msgstr "<p>Witamy kursanta/kursantkę ze strony <b>%s</b>"
 
 #: lib/lms_lib.php:90
 msgid "<p>Welcome "
@@ -53,7 +53,11 @@ msgstr "<p>Witaj "
 
 #: lib/lms_lib.php:95
 msgid "(Instructor)"
-msgstr "(Instruktor)\t"
+msgstr "(rola: <b>Instruktor</b>)\t"
+
+#: lib/lms_lib.php:97
+msgid "(Instructor+Administrator)"
+msgstr "(role: <b>Instruktor, Administrator</b>)\t"
 
 #: lib/lms_lib.php:1251
 msgid "Record deleted"
